@@ -342,7 +342,10 @@ def create_and_prepare_model(args, data_args, training_args):
     bnb_config = None
 
     load_in_8bit = args.use_8bit_qunatization
+    
     load_in_4bit = args.use_4bit_quantization
+    print("load_in_8bit:",load_in_8bit)
+    print("load_in_4bit:",load_in_4bit)
 
     if args.use_unsloth:
         from unsloth import FastLanguageModel
@@ -372,7 +375,8 @@ def create_and_prepare_model(args, data_args, training_args):
             if torch.distributed.is_available() and torch.distributed.is_initialized()
             else "auto"
         )  # {"": 0}
-
+    print("args.use_unsloth:",args.use_unsloth)
+    print("device_map:",device_map)
     if args.use_unsloth:
         # Load model
         model, _ = FastLanguageModel.from_pretrained(

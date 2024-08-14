@@ -352,16 +352,18 @@ def create_and_prepare_model(args, data_args, training_args):
 
     if args.use_4bit_quantization:
         compute_dtype = getattr(torch, args.bnb_4bit_compute_dtype)
-
+        print("compute_dtype:",compute_dtype)
         bnb_config = BitsAndBytesConfig(
             load_in_4bit=args.use_4bit_quantization,
             bnb_4bit_quant_type=args.bnb_4bit_quant_type,
             bnb_4bit_compute_dtype=compute_dtype,
             bnb_4bit_use_double_quant=args.use_nested_quant,
         )
-
+        print("torch.float16:",torch.float16)
         if compute_dtype == torch.float16 and args.use_4bit_quantization:
+            
             major, _ = torch.cuda.get_device_capability()
+            print("major:",major)
             if major >= 8:
                 print("=" * 80)
                 print(

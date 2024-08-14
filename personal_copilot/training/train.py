@@ -403,6 +403,8 @@ def create_and_prepare_model(args, data_args, training_args):
         and not args.use_unsloth
     ):
         print("prepare_model_for_kbit_training start!!!")
+        print("training_args.gradient_checkpointing:",training_args.gradient_checkpointing)
+        print("model_args.use_reentrant:",model_args.use_reentrant)
         model = prepare_model_for_kbit_training(
             model,
             use_gradient_checkpointing=training_args.gradient_checkpointing,

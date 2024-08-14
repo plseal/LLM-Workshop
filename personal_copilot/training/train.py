@@ -41,7 +41,9 @@ from transformers import (
 
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, replace_lora_weights_loftq
 import fim
-
+import os  
+  
+os.environ["WANDB_DISABLED"] = "true"
 
 # Define and parse arguments.
 @dataclass
